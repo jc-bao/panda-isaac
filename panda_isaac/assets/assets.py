@@ -5,6 +5,7 @@ import numpy as np
 import torch
 
 from isaacgym import gymapi
+from panda_isaac.math_utils import np_to_vec3, np_to_quat, transform_to_RigidTransform, RigidTransform_to_transform
 
 
 class GymAsset(ABC):
@@ -471,7 +472,7 @@ class GymURDFAsset(GymAsset):
   def get_joints(self, env_idx, name):
     dof_states = self.get_dof_states(env_idx, name)
     if self._scene.use_gpu_pipeline:
-      return dof_states[:, 0].cpu().numpy()
+      return dof_states[:, 0]
     else:
       return dof_states['pos']
 
@@ -486,7 +487,7 @@ class GymURDFAsset(GymAsset):
     dof_states = self.get_dof_states(env_idx, name)
 
     if self._scene.use_gpu_pipeline:
-      dof_states[:, 0] = torch.from_numpy(joints).type_as(
+      dof_states[:, 0] = (joints).type_as(
         dof_states).to(dof_states.device)
       dof_states[:, 1] = 0
     else:

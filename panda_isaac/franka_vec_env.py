@@ -1,6 +1,6 @@
 import numpy as np
-
 from isaacgym import gymapi
+import torch
 from panda_isaac.assets import GymFranka, GymBoxAsset, GymURDFAsset
 from panda_isaac.math_utils import np_to_vec3, rpy_to_quat, transform_to_np
 from panda_isaac.ctrl_utils import ForcePositionController, MovingMedianFilter
@@ -218,7 +218,7 @@ class GymFrankaVecEnv(GymVecEnv):
         env_idx, self._franka_name, gripper_width)
 
   def _compute_obs(self, all_actions):
-    all_obs = np.zeros((self.n_envs, 18))
+    all_obs = torch.zeros((self.n_envs, 18))
 
     for env_idx in self._scene.env_idxs:
       all_joints = self._frankas[env_idx].get_joints(

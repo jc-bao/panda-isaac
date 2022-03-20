@@ -2,7 +2,7 @@ import numpy as np
 from pathlib import Path
 
 from isaacgym import gymapi
-from panda_isaac.constants import panda_isaac_ASSETS_PATH
+from panda_isaac import panda_isaac_ASSETS_PATH
 from panda_isaac.math_utils import transform_to_RigidTransform, vec3_to_np, quat_to_rot, np_to_vec3
 
 from .assets import GymURDFAsset

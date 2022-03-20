@@ -1,19 +1,18 @@
 import argparse
 
-import numpy as np
-import torch
 from autolab_core import YamlConfig
 
 from panda_isaac.franka_vec_env import GymFrankaBlockVecEnv
 from panda_isaac.draw import draw_transforms
 
+import torch # note: import torch at last
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument('--cfg', '-c', type=str, default='cfg/rearrange.yaml')
   args = parser.parse_args()
   cfg = YamlConfig(args.cfg)
-
+  
   vec_env = GymFrankaBlockVecEnv(cfg)
 
   def custom_draws(scene):

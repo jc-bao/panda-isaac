@@ -5,7 +5,7 @@ from isaacgym import gymapi, gymtorch
 import torch
 
 from .math_utils import np_to_vec3
-from .constants import isaacgym_VERSION, quat_real_to_gym_cam
+from panda_isaac import isaacgym_VERSION, quat_real_to_gym_cam
 from .assets import GymURDFAsset
 
 
