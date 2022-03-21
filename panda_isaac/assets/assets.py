@@ -487,6 +487,8 @@ class GymURDFAsset(GymAsset):
     dof_states = self.get_dof_states(env_idx, name)
 
     if self._scene.use_gpu_pipeline:
+      if not torch.is_tensor(joints):
+        joints = torch.from_numpy(joints)
       dof_states[:, 0] = (joints).type_as(
         dof_states).to(dof_states.device)
       dof_states[:, 1] = 0
